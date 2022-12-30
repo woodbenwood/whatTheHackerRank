@@ -1,0 +1,58 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'superDigit' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. STRING n
+#  2. INTEGER k
+#
+"""This ^ was all provided by HackerRank, as was the __name__ == "__main__" codeblock below
+I don't think it requires any special access at: https://www.hackerrank.com/challenges/one-week-preparation-kit-recursive-digit-sum?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=one-week-preparation-kit&playlist_slugs%5B%5D=one-week-day-four
+"""
+
+def superDigit(n, k):
+    # Write your code here
+    # concat then sum digits, then feed back into itself
+    summy = 0
+    for num in n*k:
+        summy += int(num)
+        print(summy) 
+           
+    if len(str(summy)) != 1:
+        print("recursing")
+        superDigit(str(summy), 1)
+    else:  
+        print("you got there")
+    
+    if len(str(summy)) == 1:
+        print(int(summy))
+        return int(summy)
+    # this ^ code returns None
+    
+    print(int(summy))
+    return int(summy)
+    # this ^ code seems to re-recurse backwards through the problem
+    
+if __name__ == '__main__':
+    """is THIS the issue? does the .write() produce the reverse-recursive answers?"""
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = first_multiple_input[0]
+
+    k = int(first_multiple_input[1])
+
+    result = superDigit(n, k)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
